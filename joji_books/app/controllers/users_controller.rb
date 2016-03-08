@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   def index
     client = Goodreads::Client.new(Goodreads.configuration)
     shelf = client.shelf(29613603, 'read')
-    p shelf
-    render json: {'should': 'work'}
+    render json: shelf
   end
 end

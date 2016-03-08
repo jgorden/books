@@ -10,7 +10,10 @@ app.controller('mainController', ['$scope', '$http', function($scope, $http){
 
 
   $http.get('/users').success(function(r){
-      if (r) {console.log(r)}
+      if (r) {
+        $scope.read = r
+        console.log($scope.read)
+      }
       else {console.log('nope')}
     });
 }]);
