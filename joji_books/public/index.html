@@ -7,6 +7,9 @@
 
 <body ng-app='books' ng-controller='mainController'>
   {{test}}
-  <div ng-repeat="book in read.books">{{book.book.title}}</div>
+  <div ng-repeat="book in read.books">
+    {{book.book.title}}
+    <img ng-src="{{ imageLink(book) }}" />
+  </div>
   <div ui-view></div>
 </body>
