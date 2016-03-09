@@ -1,6 +1,20 @@
 <head>
+  <!-- angular -->
   <script src="js/vendor/angular.js"></script>
   <script src="js/vendor/angular-ui-router.js"></script>
+
+  <!-- jquery -->
+  <script src="js/vendor/jquery-1.12.1.min.js"></script>
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" type="text/css" ng-href="/css/vendor/bootstrap.css">
+  <script src="js/vendor/bootstrap.js"></script>
+  <script src="js/vendor/ui-bootstrap-tpls-1.2.4.js"></script>
+
+  <!-- styles -->
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+
+  <!-- the app -->
   <script src="js/app.js"></script>
   <script src="js/controllers/mainController.js"></script>
 </head>
@@ -8,8 +22,10 @@
 <body ng-app='books' ng-controller='mainController'>
   {{test}}
   <div ng-repeat="book in read.books">
-    {{book.book.title}}
-    <img ng-src="{{ imageLink(book) }}" />
+    <div class="">
+      <h3>{{book.book.title}}</h3>
+      <div><img ng-src="{{ imageLink(book) }}" /></div>
+    </div>
   </div>
   <div ui-view></div>
 </body>
