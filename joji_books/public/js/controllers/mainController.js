@@ -1,4 +1,4 @@
-app.controller('mainController', ['$scope', '$http', function($scope, $http){
+app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBook', function($scope, $http, $uibModal, $log, setBook){
   $scope.test = 'hey it works';
   console.log('is it working')
 
@@ -10,6 +10,27 @@ app.controller('mainController', ['$scope', '$http', function($scope, $http){
       return book.book.image_url
     }
   }
+
+
+  $scope.items = ['item1', 'item2', 'item3'];
+
+  $scope.animationsEnabled = true;
+
+  $scope.open = function (book) {
+    setBook.setTitle(book)
+    console.log($scope.title)
+    var modalInstance = $uibModal.open({
+      templateUrl: 'myModalContent.html',
+      size: 'lg'
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
 
   $http.get('/users').success(function(r){
       if (r) {
