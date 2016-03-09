@@ -16,6 +16,7 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
   $scope.open = function (book) {
     setBook.setTitle(book)
     setBook.setImage(book)
+    setBook.setRate(book)
     console.log($scope.title)
     console.log($scope.image)
     console.log(book)
