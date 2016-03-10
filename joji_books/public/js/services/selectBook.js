@@ -24,6 +24,14 @@ angular.module('books').factory('setBook', function(){
 
   book.setDescription = function(newBook){
     book.description = newBook.book.description;
+  };  
+
+  book.setAuthor = function(newBook){
+    book.author = newBook.book.authors.author.name;
+  };  
+
+  book.setAuthorImage = function(newBook){
+    book.authorImage = newBook.book.authors.author.image_url;
   };
 
   return book;

@@ -45,10 +45,12 @@
       </div>
       <div class="modal-body"> 
         <img ng-src="{{ image }}">
+        <img ng-src="{{ authorImage }}">
+        <div>{{ author }}</div>
         <uib-rating ng-model="rate" max="5" read-only="true" titles="['blegh','meh','good!','wonderful!','holy moly!']" aria-labelledby="default-rating"></uib-rating>
-        <div>{{ avg }}<div> 
-        <div>{{ diffComment }}<div> 
-        <div ng-bind-html="description | trusted"><div> 
+        <div>{{ avg }}</div> 
+        <div>{{ diffComment }}</div> 
+        <div ng-bind-html="description | trusted"></div> 
       </div>
       <div class="modal-footer">
           <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>

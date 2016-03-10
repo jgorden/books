@@ -4,6 +4,8 @@ app.controller('modalController', ['$scope', 'setBook', function($scope, setBook
   $scope.rate = setBook.rate
   $scope.avg = setBook.avg
   $scope.description = setBook.description
+  $scope.author = setBook.author
+  $scope.authorImage = setBook.authorImage
   $scope.verdict = function(){
     var diff = ($scope.rate - $scope.avg)
     if (diff >= 0.25){
