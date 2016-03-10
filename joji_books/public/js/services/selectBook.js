@@ -16,6 +16,15 @@ angular.module('books').factory('setBook', function(){
 
   book.setRate = function(newBook){
     book.rate = newBook.rating;
+  };  
+
+  book.setAvg = function(newBook){
+    book.avg = newBook.book.average_rating;
+  };  
+
+  book.setDescription = function(newBook){
+    book.description = newBook.book.description;
   };
+
   return book;
 });

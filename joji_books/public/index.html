@@ -20,6 +20,7 @@
   <script src="js/controllers/mainController.js"></script>
   <script src="js/controllers/modalController.js"></script>
   <script src="js/services/selectBook.js"></script>
+  <script src="js/filter/trusted.js"></script>
 </head>
 
 <body ng-app='books' ng-controller='mainController'>
@@ -44,7 +45,10 @@
       </div>
       <div class="modal-body"> 
         <img ng-src="{{ image }}">
-        <uib-rating ng-model="rate" max="5" read-only="true" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+        <uib-rating ng-model="rate" max="5" read-only="true" titles="['blegh','meh','good!','wonderful!','holy moly!']" aria-labelledby="default-rating"></uib-rating>
+        <div>{{ avg }}<div> 
+        <div>{{ diffComment }}<div> 
+        <div ng-bind-html="description | trusted"><div> 
       </div>
       <div class="modal-footer">
           <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
