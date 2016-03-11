@@ -36,7 +36,7 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
       // if session is stored set response as book collection
       if (res) {
         $scope.collection = res
-        console.log($scope.read)
+        console.log($scope.collection)
       }
       // else open modal to prompt session id
       else {
@@ -65,4 +65,6 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
   $scope.change = function(){
     $http.delete('users/0').success(function(){collectBooks()});
   }
+
+  
 }]);

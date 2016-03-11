@@ -15,15 +15,24 @@
   <!-- styles -->
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
 
+  
+
+
   <!-- the app -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="js/vendor/ng-google-chart.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers/mainController.js"></script>
   <script src="js/controllers/modalController.js"></script>
   <script src="js/services/selectBook.js"></script>
   <script src="js/filter/trusted.js"></script>
+  <script src="js/charts/calendar.js"></script>
+  
 </head>
 
-<body ng-app='books' ng-controller='mainController'>
+<body ng-app='books'ng-controller='mainController'>
+  
   {{test}}
   <div><button class="btn btn-primary" type="button" ng-click="change()">Change User</button></div>
   <div ng-repeat="book in collection.books">
@@ -48,12 +57,12 @@
         <img ng-src="{{ image }}">
         <img ng-src="{{ authorImage }}">
         <div>{{ author }}</div>
-        <uib-rating ng-model="rate" max="5" read-only="true" titles="['blegh','meh','good!','wonderful!','holy moly!']" aria-labelledby="default-rating"></uib-rating>
-        <div>{{ avg }}</div> 
-        <div>{{ diffComment }}</div> 
+        <div>You rated {{ title }}: <uib-rating ng-model="rate" max="5" read-only="true" titles="['blegh','meh','good!','wonderful!','holy moly!']" aria-labelledby="default-rating"></uib-rating></div>
+        <div>average score: {{ avg }}</div> 
         <div ng-bind-html="description | trusted"></div> 
       </div>
       <div class="modal-footer">
+       <bars-chart chart-data="myData" ></bars-chart>
       </div>
     </div>
   </script>

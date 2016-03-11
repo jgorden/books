@@ -14,14 +14,11 @@ class UsersController < ApplicationController
   def show
     client = Goodreads::Client.new(Goodreads.configuration)
     session[:id] = params[:id].to_i
-    shelf = client.shelf(params[:id].to_i, 'read')
     render :nothing => true, :status => 200
   end
 
   def destroy
     session.destroy
-    p 'that should do it!'
-    p session[:id]
     render :nothing => true, :status => 200
   end
 end

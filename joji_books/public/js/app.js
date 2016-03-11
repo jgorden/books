@@ -1,4 +1,4 @@
-var app = angular.module('books', ['ui.router','ui.bootstrap','ngAnimate']);
+var app = angular.module('books', ['ui.router','ui.bootstrap','ngAnimate','googlechart']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
     
