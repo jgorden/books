@@ -12,7 +12,7 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
     }
   }
 
-  // create modal
+  // create detail modal
   $scope.open = function (book) {
     setBook.setTitle(book)
     setBook.setImage(book)
@@ -31,11 +31,38 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
   };
 
 
-  $http.get('/users').success(function(r){
-      if (r) {
-        $scope.read = r
+  collectBooks = function(){
+   $http.get('/users').success(function(res){
+      // if session is stored set response as book collection
+      if (res) {
+        $scope.collection = res
         console.log($scope.read)
       }
-      else {console.log('nope')}
+      // else open modal to prompt session id
+      else {
+        $uibModal.open({
+          templateUrl: 'promptID.html',
+          size: 'lg',
+          keyboard: false,
+          backdrop: 'static',
+          controller: function($uibModalInstance, $scope, $http){
+            // set session in show route and run function again to collect books
+            $scope.send = function(id){
+              $http.get('/users/' + id).success(function(r){
+                $uibModalInstance.dismiss('cancel');
+                collectBooks();
+              });
+            }
+
+            $scope.id = null
+          }
+        });
+      }
     });
+  }
+  collectBooks();
+
+  $scope.change = function(){
+    $http.delete('users/0').success(function(){collectBooks()});
+  }
 }]);
