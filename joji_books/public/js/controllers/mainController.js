@@ -21,6 +21,8 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
     setBook.setDescription(book)
     setBook.setAuthor(book)
     setBook.setAuthorImage(book)
+    setBook.setStart(book)
+    setBook.setFinish(book)
     console.log($scope.title)
     console.log($scope.image)
     console.log(book)

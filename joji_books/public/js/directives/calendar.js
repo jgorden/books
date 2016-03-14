@@ -1,9 +1,9 @@
-app.directive('barsChart', function ($parse) {
+app.directive('dateChart', function ($parse) {
 
   var directiveDefinitionObject = {
     restrict: 'E',
     replace: false,
-    scope: {data: '=chartData'},
+    scope: {data: '=chartData', range:'=range'},
     link: function (scope, element, attrs) {
 
       var width = 960,
@@ -16,10 +16,10 @@ app.directive('barsChart', function ($parse) {
         format = d3.time.format("%Y-%m-%d");
 
       var color = d3.scale.category10();
-      var dateParse = d3.time.format("%m/%d/%Y");
+      var dateParse = d3.time.format("%b/%d/%Y");
 
       var svg = d3.select(element[0]).selectAll("svg")
-        .data(d3.range(2010, 2013))
+        .data(d3.range(scope.range.start, scope.range.finish))
         .enter().append("svg")
         .attr("width", width)
         .attr("height", height)
@@ -53,7 +53,7 @@ app.directive('barsChart', function ($parse) {
 
 
       data.forEach(function(d) {
-        d.dd = format(dateParse.parse(d.date));
+        d.dd = format(d.date);
       });
 
       var nest = d3.nest()
@@ -61,8 +61,9 @@ app.directive('barsChart', function ($parse) {
         .map(data);
 
       color.domain(d3.set(data.map(function(d) { return d.value; })).values());
+      console.log('heres the nest')
       console.log(nest)
-      rect.filter(function(d) { if (d in nest){console.log('this is d:');console.log(d);};return d in nest;})
+      rect.filter(function(d) { return d in nest })
         .attr("class", function(d) { return "day"; })
         .style("fill", function(d) { return color(nest[d][0].value); })
         .select("title")

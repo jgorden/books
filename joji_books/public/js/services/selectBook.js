@@ -32,6 +32,14 @@ angular.module('books').factory('setBook', function(){
 
   book.setAuthorImage = function(newBook){
     book.authorImage = newBook.book.authors.author.image_url;
+  };  
+
+  book.setStart = function(newBook){
+    book.start = newBook.date_added;
+  };  
+
+  book.setFinish = function(newBook){
+    book.finish = newBook.read_at;
   };
 
   return book;
