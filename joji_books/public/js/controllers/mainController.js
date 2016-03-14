@@ -66,5 +66,5 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
     $http.delete('users/0').success(function(){collectBooks()});
   }
 
-  
+
 }]);
