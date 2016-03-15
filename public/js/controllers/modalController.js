@@ -25,7 +25,7 @@ app.controller('modalController', ['$scope', 'setBook', function($scope, setBook
 
   $scope.authorPosition = function(){
     if($(window).width() < 768){ return }
-    else { return 'text-right' };
+    else { return 'text-center' };
   };
   // $(window).on('resize',$scope.authorPosition());
 }]);

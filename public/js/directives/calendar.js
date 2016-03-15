@@ -9,8 +9,8 @@ app.directive('dateChart', function ($parse) {
       setTimeout(function(){
 
         var width = $('#footer').outerWidth() -30;
-            height = width / 7,
-            cellSize = height / 8; // cell size
+            height = width / 7 + 50,
+            cellSize = (height - 50)/ 8; // cell size
         var data = scope.data;
         var day = d3.time.format("%w"),
           week = d3.time.format("%U"),
@@ -27,7 +27,7 @@ app.directive('dateChart', function ($parse) {
           .attr("height", height)
           .attr("class", "RdYlGn")
           .append("g")
-          .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+          .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - 50 - cellSize * 7 - 1) + ")");
 
         svg.append("text")
           .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
@@ -54,6 +54,17 @@ app.directive('dateChart', function ($parse) {
           .attr("d", monthPath);
 
 
+        var month_name = d3.time.format("%b")
+
+        svg.selectAll("text.month")
+          .data(function(d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+          .enter().insert("text", "text.month")
+          .attr("class", "month small")
+          .attr("x", function(d) { return week(d) * cellSize+20; })
+          .attr("y", 8 * cellSize)
+          .text(month_name);
+
+
         data.forEach(function(d) {
           d.dd = format(d.date);
         });
@@ -69,6 +80,7 @@ app.directive('dateChart', function ($parse) {
           .style("fill", function(d) { return color(nest[d][0].value); })
           .select("title")
 
+
         function monthPath(t0) {
           var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
             d0 = +day(t0), w0 = +week(t0),
@@ -83,15 +95,15 @@ app.directive('dateChart', function ($parse) {
         function resize() {
         
           var width = $('#footer').outerWidth() -30;
-              height = width / 7,
-              cellSize = height / 8; // cell size
+            height = width / 7 + 50,
+            cellSize = (height - 50)/ 8; // cell size
 
           svg.attr("width", width)
             .attr("height", height);
 
           svg.selectAll(".RdYlGn")
             .attr("transform", function(d, i) {
-              return "translate(" + ((width - cellSize * 53) / 2) + "," + ((height - cellSize * 7 - 1) + (height * i)) + ")";
+              return "translate(" + ((width - cellSize * 53) / 2) + "," + (((height - 50) - cellSize * 7 - 1) + (height * i)) + ")";
             });
           
           svg.selectAll(".month").attr("d", monthPath);
@@ -107,6 +119,11 @@ app.directive('dateChart', function ($parse) {
               d = format.parse(d);
               return day(d) * cellSize;
             });
+            
+          svg.selectAll("text.month")
+            .attr("x", function(d) { return week(d) * cellSize+20; })
+            .attr("y", 8 * cellSize);
+
         };
 
         d3.select(window).on('resize', resize);
