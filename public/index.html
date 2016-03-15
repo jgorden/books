@@ -26,7 +26,7 @@
   <script src="js/services/selectBook.js"></script>
   <script src="js/filter/trusted.js"></script>
   <script src="js/directives/calendar.js"></script>
-  <script src="js/directives/resize.js"></script>
+
   
 </head>
 
@@ -52,32 +52,33 @@
 
   <!-- book detail modal -->
   <script type="text/ng-template" id="myModalContent.html">
-    <div class="container-fixed">
+    <div class="container-fluid">
       <div ng-controller="modalController">
         <div class="modal-header row">
             <h3 class="modal-title col-xs-12">{{ title }}</h3>
         </div>
         <div class="modal-body row">
           
-            <div class="col-xs-12 col-sm-6">
-              <img ng-src="{{ image }}">
+            <div class="col-xs-12 col-sm-6 text-center">
+              <img class="cover" ng-src="{{ image }}">
               <div>You rated {{ title }}: <uib-rating ng-model="rate" max="5" read-only="true" titles="['blegh','meh','good!','wonderful!','holy moly!']" aria-labelledby="default-rating"></uib-rating></div>
               <div>average score: {{ avg }}</div>
             </div> 
-            <div resize class="col-xs-12 col-sm-6 ng-class: authorPosition();">
+            <div class="col-xs-12 col-sm-6 ng-class: authorPosition();">
               <img ng-src="{{ authorImage }}">
               <div>{{ author }}</div>
             </div>
           
-          <div class="row test">
+          <div class="row">
             <div class="col-xs-12">
               <blockquote><div ng-bind-html="description | trusted"></div></blockquote>
             </div>
           </div>
         </div>
         <div id='footer' class="modal-footer row">
-          <p></p>
-         <date-chart chart-data="myData" range='range'></date-chart>
+          <div class="col-xs-12">
+            <date-chart chart-data="myData" range='range'></date-chart>
+          </div>
         </div>
       </div>
     </div>
