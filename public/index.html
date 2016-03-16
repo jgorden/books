@@ -86,15 +86,23 @@
 
   <!-- Get goodreads ID prompt -->
   <script type="text/ng-template" id="promptID.html">
-      <div class="modal-header">
+    <div class="container-fluid">
+      <div class="modal-header row">
           <h3 class="modal-title">Do you have a Goodreads ID?</h3>
       </div>
-      <div class="modal-body"> 
-      <div>No! Show me Joji&apos;s books.<button class="btn btn-primary" type="button" ng-click="send('29613603')">No</button></div>
-      <div>Yes! Show me my books.{{ id }}<input ng-model='id' /><button class="btn btn-primary" type="button" ng-click="send(id)">Yes</button></div>
+      <div class="modal-body row">
+        <div class="col-xs-6"> 
+          <div>No! Show me Joji&apos;s books.<button class="btn btn-primary" type="button" ng-click="send('29613603')">No</button></div>
+        </div>
+        <div class="col-xs-6">
+          <div>Yes! Show me my books.<input placeholder="Goodreads ID" ng-model='id' /><button class="btn btn-primary" type="button" ng-click="send(id)">Yes</button></div>
+          <p>You can find your Goodreads ID in the url of your profile page.</p>
+        </div>
+        <div class="col-xs-6 col-xs-offset-3">
+          <img class="img-responsive" ng-src="images/gr_id.png">
+        </div>
       </div>
-      <div class="modal-footer">
-      </div>
+    </div>
   </script>
 
   <div ui-view></div>
