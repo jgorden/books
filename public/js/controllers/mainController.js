@@ -23,9 +23,6 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
     setBook.setAuthorImage(book)
     setBook.setStart(book)
     setBook.setFinish(book)
-    console.log($scope.title)
-    console.log($scope.image)
-    console.log(book)
     var modalInstance = $uibModal.open({
       templateUrl: 'myModalContent.html',
       size: 'lg'
@@ -40,6 +37,8 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
         $scope.collection = res.books;
         console.log($scope.collection)
         $scope.page = 1;
+
+        // check if there are more books to load
         if (res.books.length < 20) { $scope.moreBooks = true }
         else { $scope.moreBooks = false }
       }
@@ -67,6 +66,7 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
   }
   collectBooks();
 
+  // load more books from api to collection
   $scope.loadMore = function() {
     $scope.page++;
     $http.post('users/', $scope.page).success(function(res){
@@ -74,15 +74,12 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
           $scope.collection.push(res.books[i]);
         };
         if (res.books.length < 20) { $scope.moreBooks = true }
-      })
-  }
+      });
+  };
 
-  
-  $scope.calling = true
-
+  // change user
   $scope.change = function(){
     $http.delete('users/0').success(function(){collectBooks()});
-  }
-
+  };
 
 }]);

@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # route to collect more books from certain page of 'read' shelf
   def page
     client = Goodreads::Client.new(Goodreads.configuration)
     if session[:id]
@@ -21,6 +22,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # sets user session
   def show
     client = Goodreads::Client.new(Goodreads.configuration)
     session[:id] = params[:id].to_i

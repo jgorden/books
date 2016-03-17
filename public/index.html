@@ -32,8 +32,6 @@
 </head>
 
 <body ng-app='books'ng-controller='mainController'>
-  
-  {{test}}
 
   <div><button class="btn btn-primary" type="button" ng-click="change()">Change User</button></div>
   </div>
@@ -68,7 +66,7 @@
               <div>You rated {{ title }}: <uib-rating ng-model="rate" max="5" read-only="true" titles="['blegh','meh','good!','wonderful!','holy moly!']" aria-labelledby="default-rating"></uib-rating></div>
               <div>average score: {{ avg }}</div>
             </div> 
-            <div class="col-xs-12 col-sm-6 ng-class: authorPosition();">
+            <div class="col-xs-12 col-sm-6 text-center">
               <img ng-src="{{ authorImage }}">
               <div>{{ author }}</div>
             </div>

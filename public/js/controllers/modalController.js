@@ -21,11 +21,6 @@ app.controller('modalController', ['$scope', 'setBook', function($scope, setBook
     current.setDate(current.getDate() + 1)
   }
   // add date of finish to data set
-  $scope.myData.push({'date':finish, 'value':'1'})
-
-  $scope.authorPosition = function(){
-    if($(window).width() < 768){ return }
-    else { return 'text-center' };
-  };
-  // $(window).on('resize',$scope.authorPosition());
+  $scope.myData.push({'date':finish, 'value':'1'});
+  
 }]);
