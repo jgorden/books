@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'users#index'
   resources :users, only: [:index, :show, :destroy], defaults: {format: :json}
+  post 'users' => 'users#page', defaults: {format: :json}
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

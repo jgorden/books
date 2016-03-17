@@ -37,8 +37,11 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
    $http.get('/users').success(function(res){
       // if session is stored set response as book collection
       if (res) {
-        $scope.collection = res
+        $scope.collection = res.books;
         console.log($scope.collection)
+        $scope.page = 1;
+        if (res.books.length < 20) { $scope.moreBooks = true }
+        else { $scope.moreBooks = false }
       }
       // else open modal to prompt session id
       else {
@@ -63,6 +66,19 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
     });
   }
   collectBooks();
+
+  $scope.loadMore = function() {
+    $scope.page++;
+    $http.post('users/', $scope.page).success(function(res){
+        for (i = 0; i < res.books.length; i++){
+          $scope.collection.push(res.books[i]);
+        };
+        if (res.books.length < 20) { $scope.moreBooks = true }
+      })
+  }
+
+  
+  $scope.calling = true
 
   $scope.change = function(){
     $http.delete('users/0').success(function(){collectBooks()});

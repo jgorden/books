@@ -11,6 +11,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def page
+    client = Goodreads::Client.new(Goodreads.configuration)
+    if session[:id]
+      shelf = client.shelf(session[:id], 'read', 'page': params[:_json])
+      render json: shelf
+    else
+      render :nothing => true, :status => 200
+    end
+  end
+
   def show
     client = Goodreads::Client.new(Goodreads.configuration)
     session[:id] = params[:id].to_i

@@ -1,12 +1,12 @@
 <meta charset="utf-8">
 <head>
+  <!-- jquery -->
+  <script src="js/vendor/jquery-1.12.1.min.js"></script>
+
   <!-- angular -->
   <script src="js/vendor/angular.js"></script>
   <script src="js/vendor/angular-ui-router.js"></script>
   <script src="js/vendor/angular-animate.js"></script>
-
-  <!-- jquery -->
-  <script src="js/vendor/jquery-1.12.1.min.js"></script>
 
   <!-- bootstrap -->
   <link rel="stylesheet" type="text/css" href="/css/vendor/bootstrap.css" />
@@ -41,14 +41,17 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-8 col-xs-offset-2 text-center">
-        <div ng-repeat="book in collection.books">
-          <div class="test">
-            <h3>{{book.book.title}}</h3>
-            <div><img ng-click="open(book); mbook = book" ng-src="{{ imageLink(book) }}" class="center-block cover img-responsive link" /></div>
+        
+          <div ng-repeat="book in collection">
+            <div class="test">
+              <h3>{{book.book.title}}</h3>
+              <div><img ng-click="open(book); mbook = book" ng-src="{{ imageLink(book) }}" class="center-block cover img-responsive link" /></div>
+            </div>
           </div>
-        </div>
+       
       </div>
     </div>
+    <button ng-hide='moreBooks' ng-click='loadMore()'>Load more books</button>
   </div>
 
   <!-- book detail modal -->
