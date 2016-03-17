@@ -22,5 +22,12 @@
   border-style: solid;
   border-color: green;
 }
-.small { font-weight: 1;}
+.description { 
+  font-family: Times New Roman; 
+  background-color: white;
+  border-radius: 5px;
+}
+
+body { font-family: Raleway;}
+.bg {background-color: #E0E0E0;}
 .tester  {background-color: red;}
