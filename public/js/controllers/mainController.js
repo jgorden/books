@@ -23,9 +23,6 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
     setBook.setAuthorImage(book)
     setBook.setStart(book)
     setBook.setFinish(book)
-    console.log($scope.title)
-    console.log($scope.image)
-    console.log(book)
     var modalInstance = $uibModal.open({
       templateUrl: 'myModalContent.html',
       size: 'lg'
@@ -37,8 +34,13 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
    $http.get('/users').success(function(res){
       // if session is stored set response as book collection
       if (res) {
-        $scope.collection = res
+        $scope.collection = res.books;
         console.log($scope.collection)
+        $scope.page = 1;
+
+        // check if there are more books to load
+        if (res.books.length < 20) { $scope.moreBooks = true }
+        else { $scope.moreBooks = false }
       }
       // else open modal to prompt session id
       else {
@@ -64,9 +66,20 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
   }
   collectBooks();
 
+  // load more books from api to collection
+  $scope.loadMore = function() {
+    $scope.page++;
+    $http.post('users/', $scope.page).success(function(res){
+        for (i = 0; i < res.books.length; i++){
+          $scope.collection.push(res.books[i]);
+        };
+        if (res.books.length < 20) { $scope.moreBooks = true }
+      });
+  };
+
+  // change user
   $scope.change = function(){
     $http.delete('users/0').success(function(){collectBooks()});
-  }
-
+  };
 
 }]);

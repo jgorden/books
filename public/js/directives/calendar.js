@@ -60,7 +60,7 @@ app.directive('dateChart', function ($parse) {
           .data(function(d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
           .enter().insert("text", "text.month")
           .attr("class", "month small")
-          .attr("x", function(d) { return week(d) * cellSize+20; })
+          .attr("x", function(d) { return week(d) * cellSize+15; })
           .attr("y", 8 * cellSize)
           .text(month_name);
 
@@ -121,7 +121,7 @@ app.directive('dateChart', function ($parse) {
             });
             
           svg.selectAll("text.month")
-            .attr("x", function(d) { return week(d) * cellSize+20; })
+            .attr("x", function(d) { return week(d) * cellSize+15; })
             .attr("y", 8 * cellSize);
 
         };

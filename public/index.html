@@ -1,12 +1,12 @@
 <meta charset="utf-8">
 <head>
+  <!-- jquery -->
+  <script src="js/vendor/jquery-1.12.1.min.js"></script>
+
   <!-- angular -->
   <script src="js/vendor/angular.js"></script>
   <script src="js/vendor/angular-ui-router.js"></script>
   <script src="js/vendor/angular-animate.js"></script>
-
-  <!-- jquery -->
-  <script src="js/vendor/jquery-1.12.1.min.js"></script>
 
   <!-- bootstrap -->
   <link rel="stylesheet" type="text/css" href="/css/vendor/bootstrap.css" />
@@ -18,6 +18,7 @@
 
   <!-- styles -->
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway">
 
   <!-- the app -->
   <script src="js/app.js"></script>
@@ -31,8 +32,6 @@
 </head>
 
 <body ng-app='books'ng-controller='mainController'>
-  
-  {{test}}
 
   <div><button class="btn btn-primary" type="button" ng-click="change()">Change User</button></div>
   </div>
@@ -40,14 +39,17 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-xs-8 col-xs-offset-2 text-center">
-        <div ng-repeat="book in collection.books">
-          <div class="test">
-            <h3>{{book.book.title}}</h3>
-            <div><img ng-click="open(book); mbook = book" ng-src="{{ imageLink(book) }}" class="center-block cover img-responsive link" /></div>
+        
+          <div ng-repeat="book in collection">
+            <div class="test">
+              <h3>{{book.book.title}}</h3>
+              <div><img ng-click="open(book); mbook = book" ng-src="{{ imageLink(book) }}" class="center-block cover img-responsive link" /></div>
+            </div>
           </div>
-        </div>
+       
       </div>
     </div>
+    <button ng-hide='moreBooks' ng-click='loadMore()'>Load more books</button>
   </div>
 
   <!-- book detail modal -->
@@ -57,25 +59,25 @@
         <div class="modal-header row">
             <h3 class="modal-title col-xs-12">{{ title }}</h3>
         </div>
-        <div class="modal-body row">
+        <div class="modal-body row bg">
           
             <div class="col-xs-12 col-sm-6 text-center">
               <img class="cover" ng-src="{{ image }}">
               <div>You rated {{ title }}: <uib-rating ng-model="rate" max="5" read-only="true" titles="['blegh','meh','good!','wonderful!','holy moly!']" aria-labelledby="default-rating"></uib-rating></div>
               <div>average score: {{ avg }}</div>
             </div> 
-            <div class="col-xs-12 col-sm-6 ng-class: authorPosition();">
+            <div class="col-xs-12 col-sm-6 text-center">
               <img ng-src="{{ authorImage }}">
               <div>{{ author }}</div>
             </div>
           
           <div class="row">
             <div class="col-xs-12">
-              <blockquote><div ng-bind-html="description | trusted"></div></blockquote>
+              <div class="description"><blockquote><div ng-bind-html="description | trusted"></div></blockquote></div>
             </div>
           </div>
         </div>
-        <div id='footer' class="modal-footer row">
+        <div id='footer' class="modal-footer row bg">
           <div class="col-xs-12">
             <date-chart chart-data="myData" range='range'></date-chart>
           </div>
@@ -86,15 +88,23 @@
 
   <!-- Get goodreads ID prompt -->
   <script type="text/ng-template" id="promptID.html">
-      <div class="modal-header">
-          <h3 class="modal-title">Do you have a Goodreads ID?</h3>
+    <div class="container-fluid">
+      <div class="modal-header row">
+          <h3 class="modal-title text">Do you have a Goodreads ID?</h3>
       </div>
-      <div class="modal-body"> 
-      <div>No! Show me Joji&apos;s books.<button class="btn btn-primary" type="button" ng-click="send('29613603')">No</button></div>
-      <div>Yes! Show me my books.{{ id }}<input ng-model='id' /><button class="btn btn-primary" type="button" ng-click="send(id)">Yes</button></div>
+      <div class="modal-body row">
+        <div class="col-xs-6"> 
+          <div>No! Show me Joji&apos;s books. <button class="btn btn-primary" type="button" ng-click="send('29613603')">No</button></div>
+        </div>
+        <div class="col-xs-6">
+          <div>Yes! Show me my books.<input placeholder="Goodreads ID" ng-model='id' /> <button class="btn btn-primary" type="button" ng-click="send(id)">Yes</button></div>
+        </div>
+        <div class="col-xs-6 col-xs-offset-3">
+          <p>You can find your Goodreads ID in the url of your profile page.</p>
+          <img class="img-responsive" ng-src="images/gr_id.png">
+        </div>
       </div>
-      <div class="modal-footer">
-      </div>
+    </div>
   </script>
 
   <div ui-view></div>
