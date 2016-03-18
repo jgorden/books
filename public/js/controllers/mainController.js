@@ -1,6 +1,4 @@
 app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBook', function($scope, $http, $uibModal, $log, setBook){
-  $scope.test = 'hey it works';
-  console.log('is it working')
 
   // set book cover image, open library if no image available, otherwise goodreads image
   $scope.imageLink = function(book){
@@ -24,7 +22,7 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
     setBook.setStart(book)
     setBook.setFinish(book)
     var modalInstance = $uibModal.open({
-      templateUrl: 'myModalContent.html',
+      templateUrl: 'details.html',
       size: 'lg'
     });
   };
@@ -35,7 +33,6 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
       // if session is stored set response as book collection
       if (res) {
         $scope.collection = res.books;
-        console.log($scope.collection)
         $scope.page = 1;
 
         // check if there are more books to load
@@ -50,6 +47,7 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
           keyboard: false,
           backdrop: 'static',
           controller: function($uibModalInstance, $scope, $http){
+            $scope.id = null
             // set session in show route and run function again to collect books
             $scope.send = function(id){
               $http.get('/users/' + id).success(function(r){
@@ -57,8 +55,6 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
                 collectBooks();
               });
             }
-
-            $scope.id = null
           }
         });
       }
