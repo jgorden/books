@@ -32,24 +32,21 @@
 </head>
 
 <body ng-app='books'ng-controller='mainController'>
+    
+  <div class="header text-right"><button class="btn btn-primary" type="button" ng-click="change()">Change User</button></div>
 
-  <div><button class="btn btn-primary" type="button" ng-click="change()">Change User</button></div>
-  </div>
-
-  <div class="container-fluid">
+  <div ng-style="{'background-image':'url(images/2light.jpg)'}" class="container-fluid background">
     <div class="row">
-      <div class="col-xs-8 col-xs-offset-2 text-center">
-        
-          <div ng-repeat="book in collection">
-            <div class="test">
-              <h3>{{book.book.title}}</h3>
-              <div><img ng-click="open(book); mbook = book" ng-src="{{ imageLink(book) }}" class="center-block cover img-responsive link" /></div>
-            </div>
+      <div class="col-xs-8 col-xs-offset-2 text-center lb">
+        <div ng-repeat="book in collection">
+          <div ng-style="{'background-image':'url(images/wood1.jpg)'}" class="cell">
+            <h3>{{book.book.title}}</h3>
+            <div><img ng-click="open(book); mbook = book" ng-src="{{ imageLink(book) }}" class="center-block cover img-responsive link shadow" /></div>
           </div>
-       
+        </div>
+        <button class="btn btn-primary" ng-hide='moreBooks' ng-click='loadMore()'>Load more books</button>
       </div>
     </div>
-    <button ng-hide='moreBooks' ng-click='loadMore()'>Load more books</button>
   </div>
 
   <!-- book detail modal -->
@@ -106,6 +103,4 @@
       </div>
     </div>
   </script>
-
-  <div ui-view></div>
 </body>
