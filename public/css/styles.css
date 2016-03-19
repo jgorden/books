@@ -64,6 +64,9 @@ body {
   background-attachment: fixed;
   background-size: initial;
   padding-top: 65px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 .bg {background-color: #E0E0E0;}
