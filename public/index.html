@@ -75,8 +75,9 @@
           </div>
         </div>
         <div id='footer' class="modal-footer row bg">
+          <div class="text-left" ng-show="display"><h4 class="ctitle">Time Spent Reading:</h4></div>
           <div class="col-xs-12">
-            <date-chart chart-data="myData" range='range'></date-chart>
+            <date-chart id="calendar" chart-data="myData" range='range'></date-chart>
           </div>
         </div>
       </div>
@@ -94,7 +95,7 @@
           <div>No! Show me Joji&apos;s books. <button class="btn btn-primary" type="button" ng-click="send('29613603')">No</button></div>
         </div>
         <div class="col-xs-6">
-          <div>Yes! Show me my books.<input placeholder="Goodreads ID" ng-model='id' /> <button class="btn btn-primary" type="button" ng-click="send(id)">Yes</button></div>
+          <div>Yes! Show me my books. <input placeholder="Goodreads ID" ng-model='id' /> <button class="btn btn-primary" type="button" ng-click="send(id)">Yes</button></div>
         </div>
         <div class="col-xs-6 col-xs-offset-3">
           <p>You can find your Goodreads ID in the url of your profile page.</p>
