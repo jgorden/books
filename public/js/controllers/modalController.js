@@ -23,4 +23,8 @@ app.controller('modalController', ['$scope', 'setBook', function($scope, setBook
   // add date of finish to data set
   $scope.myData.push({'date':finish, 'value':'1'});
   
+  // if start and end date are present, add context header for calendar
+  if (setBook.start && setBook.finish){
+    $scope.display = true;
+  }
 }]);
