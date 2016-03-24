@@ -2,7 +2,7 @@ Books!
 
 Fun little project to experiment with the [Goodreads API](https://www.goodreads.com/api/). Plug in your own Goodreads ID for fancy book browsing, or judge my poor taste in literature. 
 
-Developed using Ruby 2.2.3. Backend Rails API with an Angular frontend. You can find it live at http://jojis-books.herokuapp.com
+Developed using Ruby ~~2.2.3~~ 2.2.4. Backend Rails API with an Angular frontend. You can find it live at http://jojis-books.herokuapp.com
 
 To run locally fork/clone down and navigate to the project directory.
 ```bash
