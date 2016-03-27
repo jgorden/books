@@ -12,6 +12,7 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
 
   // create detail modal
   $scope.open = function (book) {
+    // collect book information
     setBook.setTitle(book)
     setBook.setImage(book)
     setBook.setRate(book)
@@ -21,6 +22,7 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
     setBook.setAuthorImage(book)
     setBook.setStart(book)
     setBook.setFinish(book)
+    // the actual modal
     var modalInstance = $uibModal.open({
       templateUrl: 'details.html',
       size: 'lg'

@@ -1,4 +1,4 @@
-Books!
+**Books!**
 
 Fun little project to experiment with the [Goodreads API](https://www.goodreads.com/api/). Plug in your own Goodreads ID for fancy book browsing, or judge my poor taste in literature. 
 
