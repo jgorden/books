@@ -29,12 +29,30 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
     });
   };
 
+  login = function(){
+    $uibModal.open({
+      templateUrl: 'promptID.html',
+      size: 'lg',
+      keyboard: false,
+      backdrop: 'static',
+      controller: function($uibModalInstance, $scope, $http){
+        $scope.id = null
+        // set session in show route and run function again to collect books
+        $scope.send = function(id){
+          $http.get('/users/' + id).success(function(r){
+            $uibModalInstance.dismiss('cancel');
+            collectBooks();
+          });
+        }
+      }
+    });
+  }
 
   collectBooks = function(){
    $http.get('/users').success(function(res){
 
       // if session is stored set response as book collection
-      if (res && !res.error) {
+      if (res.books && res.books.length > 0 && !res.error) {
         $scope.collection = res.books;
         $scope.page = 1;
 
@@ -42,24 +60,17 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
         if (res.books.length < 20) { $scope.moreBooks = true }
         else { $scope.moreBooks = false }
       }
+      else if (res.books && res.books.length == 0) {
+        alert("This user has not read any books!");
+        login();
+      }
+      else if (res.error){
+        alert("User does not exist!");
+        login();
+      }
       // else open modal to prompt session id
       else {
-        $uibModal.open({
-          templateUrl: 'promptID.html',
-          size: 'lg',
-          keyboard: false,
-          backdrop: 'static',
-          controller: function($uibModalInstance, $scope, $http){
-            $scope.id = null
-            // set session in show route and run function again to collect books
-            $scope.send = function(id){
-              $http.get('/users/' + id).success(function(r){
-                $uibModalInstance.dismiss('cancel');
-                collectBooks();
-              });
-            }
-          }
-        });
+        login();
       }
     });
   }
