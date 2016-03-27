@@ -32,8 +32,9 @@ app.controller('mainController', ['$scope', '$http', '$uibModal', '$log', 'setBo
 
   collectBooks = function(){
    $http.get('/users').success(function(res){
+
       // if session is stored set response as book collection
-      if (res) {
+      if (res && !res.error) {
         $scope.collection = res.books;
         $scope.page = 1;
 
