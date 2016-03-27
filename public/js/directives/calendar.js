@@ -5,7 +5,7 @@ app.directive('dateChart', function ($parse) {
     replace: false,
     scope: {data: '=chartData', range:'=range'},
     link: function (scope, element, attrs) {
-
+      // Timeout necessary for html to load first
       setTimeout(function(){
 
         var width = $('#footer').outerWidth() -30;
@@ -20,6 +20,7 @@ app.directive('dateChart', function ($parse) {
         var color = d3.scale.category10();
         var dateParse = d3.time.format("%b/%d/%Y");
 
+        // selecting tag as element, creating chart structure
         var svg = d3.select(element[0]).selectAll("svg")
           .data(d3.range(scope.range.start, scope.range.finish))
           .enter().append("svg")
@@ -29,11 +30,13 @@ app.directive('dateChart', function ($parse) {
           .append("g")
           .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - 50 - cellSize * 7 - 1) + ")");
 
+        // year label
         svg.append("text")
           .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
           .style("text-anchor", "middle")
           .text(function(d) { return d; });
 
+        // filling in the days
         var rect = svg.selectAll(".day")
           .data(function(d) { return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
           .enter().append("rect")
@@ -64,7 +67,7 @@ app.directive('dateChart', function ($parse) {
           .attr("y", 8 * cellSize)
           .text(month_name);
 
-
+        // data formatting
         data.forEach(function(d) {
           d.dd = format(d.date);
         });
@@ -74,7 +77,7 @@ app.directive('dateChart', function ($parse) {
           .map(data);
 
         color.domain(d3.set(data.map(function(d) { return d.value; })).values());
-        
+        // color in selected dates from data
         rect.filter(function(d) { return d in nest })
           .attr("class", function(d) { return "day"; })
           .style("fill", function(d) { return color(nest[d][0].value); })
