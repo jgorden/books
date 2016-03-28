@@ -74,7 +74,8 @@ body {
   -o-background-size: cover;
 }
 
-.bg {background-color: #d8dbdf;}
+.bg {background-color: #e0e0e0;}
+.bg-session {background-color: #d8dbdf;}
 
 .spacer {
   margin-bottom: 1em;
