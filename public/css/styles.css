@@ -74,6 +74,10 @@ body {
   -o-background-size: cover;
 }
 
-.bg {background-color: #E0E0E0;}
+.bg {background-color: #d8dbdf;}
+
+.spacer {
+  margin-bottom: 1em;
+}
 
 .tester  {background-color: red;}
